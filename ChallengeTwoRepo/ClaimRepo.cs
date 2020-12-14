@@ -83,6 +83,10 @@ namespace ChallengeTwoRepo
         {
             return _queueOfClaims;
         }
+        public void removeNextClaimFromQueue()
+        {
+            _queueOfClaims.Dequeue();
+        }
 
         /*public DataTable SeeAllClaims()
         {

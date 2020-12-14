@@ -155,7 +155,7 @@ namespace ChallengeTwoConsole
             string input = Console.ReadLine().ToLower();
             if (input == "y")
             {
-                claimQueue.Dequeue();
+                _claimRepo.removeNextClaimFromQueue();
             }
             else
             {
