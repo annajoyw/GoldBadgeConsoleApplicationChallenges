@@ -12,8 +12,13 @@ namespace ChallengeOneCafeConsole
         private CafeMenuRepo _menuRepo = new CafeMenuRepo();
         public void Run()
         {
-            //seedMenuItems
+            SeedData();
             AppMenu();
+        }
+        private void SeedData()
+        {
+            var cookie = new MenuItem(1, "Chocolate Chip Cookie", "Delicious fresh baked cookie", new List<string> { "chocolate chips", "butter", "sugar", "brown sugar", "egg", "flour", "baking powder" }, 1.99);
+            _menuRepo.AddItemToDirectory(cookie);
         }
 
         private void AppMenu()
@@ -49,7 +54,7 @@ namespace ChallengeOneCafeConsole
                         DeleteMenuItem();
                         break;
                     case "5":
-                        Console.WriteLine("Goodbye!");
+                        Console.WriteLine("Goodbye! Have a wonderful day :-)");
                         keepRunning = false;
                         break;
                     default:
@@ -65,7 +70,7 @@ namespace ChallengeOneCafeConsole
         private void AddNewMenuItem()
         {
             Console.Clear();
-            CafeMenu newItem = new CafeMenu();
+            MenuItem newItem = new MenuItem();
 
             Console.WriteLine("Please enter meal number");
             string mealNumAsString = Console.ReadLine();
@@ -78,55 +83,101 @@ namespace ChallengeOneCafeConsole
             newItem.Description = Console.ReadLine();
 
             Console.WriteLine("Please enter meal ingredients");
-            newItem.Ingredients = Console.ReadLine();
+            string ingredientList = Console.ReadLine();
+            newItem.ListOfIngredients.Add(ingredientList);
 
-            Console.WriteLine("Please enter meal price");
+            Console.WriteLine("Please enter meal price(enter price as decimal ex. 2.99 or 10.00)");
             string priceAsString = Console.ReadLine();
             newItem.Price = double.Parse(priceAsString);
+            _menuRepo.AddItemToDirectory(newItem);
         }
 
         private void UpdateMenuItem()
         {
             ViewMenu();
             Console.WriteLine("Pleae enter meal number of the item you wish to update");
-            int oldMealNumberAsString = int.Parse(Console.ReadLine());
-            CafeMenu newItem = new CafeMenu();
-
-            Console.WriteLine("Please enter meal number");
-            string mealNumAsString = Console.ReadLine();
-            newItem.MealNumber = int.Parse(mealNumAsString);
-
-            Console.WriteLine("Please enter meal name");
-            newItem.Name = Console.ReadLine();
-
-            Console.WriteLine("Please enter meal description");
-            newItem.Description = Console.ReadLine();
-
-            Console.WriteLine("Please enter meal ingredients");
-            newItem.Ingredients = Console.ReadLine();
-
-            Console.WriteLine("Please enter meal price");
-            string priceAsString = Console.ReadLine();
-            newItem.Price = double.Parse(priceAsString);
-
-           bool wasUpdated = _menuRepo.UpdateMenuItem(oldMealNumberAsString, newItem);
-            if (wasUpdated)
+            int mealNumber = int.Parse(Console.ReadLine());
+            MenuItem mealToUpdate = _menuRepo.GetItemByNumber(mealNumber);
+            DisplayMenuItem(mealToUpdate);
+            MenuItem newItem = new MenuItem();
+            Console.WriteLine("What would you like to update?\n" +
+                "1. Meal Number\n" +
+                "2. Meal Name\n" +
+                "3. Descpription\n" +
+                "4. Ingredients\n" +
+                "5. Price");
+            switch (Console.ReadLine())
             {
-                Console.WriteLine("Menu item was successfully updated!");
+                case "1":
+                    Console.WriteLine("Please enter updated meal number");
+                    string mealNumAsString = Console.ReadLine();
+                    newItem.MealNumber = int.Parse(mealNumAsString);
+                    break;
+                case "2":
+                    Console.WriteLine("Please enter updated meal name");
+                    newItem.Name = Console.ReadLine();
+                    break;
+                case "3":
+                    Console.WriteLine("Please enter updated meal description");
+                    newItem.Description = Console.ReadLine();
+                    break;
+                case "4":
+                    Console.WriteLine("Would you like to add or remove ingredients? Press 'a' to add or 'r' to remove");
+                    //string userInput=(Console.ReadLine());
+                    //yes/no method also takes in "a" and "r"
+                    bool input = GetYesNoAnswer();
+                    if (input)
+                    {
+                        Console.WriteLine("Please enter the ingredients you would like to add");
+                        string newIngredient = Console.ReadLine();
+                        newItem.ListOfIngredients.Add(newIngredient);
+                        int initialCount = newItem.ListOfIngredients.Count;
+                        if (initialCount< newItem.ListOfIngredients.Count)
+                        {
+                            Console.WriteLine("New Ingredients were successfully added");
+                        }
+                        else
+                        {
+                            Console.WriteLine("New Ingredients could not be added");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Please enter the ingredient you wish to remove from list");
+                        string removedIngredient = Console.ReadLine();
+                        newItem.ListOfIngredients.Remove(removedIngredient);
+                        int initialCount = newItem.ListOfIngredients.Count;
+                        if (initialCount > newItem.ListOfIngredients.Count)
+                        {
+                            Console.WriteLine("Ingredient was successfully deleted");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Ingredient was not deleted");
+                        }
+                    }
+                    break;
+                case "5":
+                    Console.WriteLine("Please enter updated meal price");
+                    string priceAsString = Console.ReadLine();
+                    newItem.Price = double.Parse(priceAsString);
+                    break;
             }
-            else
-            {
-                Console.WriteLine("Could not delete item");
-            }
-        
+            _menuRepo.UpdateMenuItem(mealNumber, newItem);
+            Console.WriteLine("For updating aspects other than 'Ingredients' please view 'current menu' option in main menu to ensure item was successfully updated.");
+
         }
         private void ViewMenu()
         {
             Console.Clear();
-            List<CafeMenu> cafeMenus = _menuRepo.SeeMenu();
-            foreach (CafeMenu item in cafeMenus)
+            List<MenuItem> cafeMenus = _menuRepo.SeeMenu();
+            foreach (MenuItem item in cafeMenus)
             {
-                Console.WriteLine($"Meal Number:{item.MealNumber}, Name: {item.Name}, Description: {item.Description}, Ingredients: {item.Ingredients}, Price: {item.Price}");
+                Console.WriteLine($"Meal Number:{item.MealNumber}, Name: {item.Name}, Description: {item.Description}, Price: {item.Price}");
+                foreach(var ingredient in item.ListOfIngredients)
+                {
+                    Console.WriteLine($"Ingredient:{ingredient}");
+                }
             }
 
         }
@@ -146,6 +197,35 @@ namespace ChallengeOneCafeConsole
                 Console.WriteLine("Item could not be removed");
             }
 
+        }
+        private void DisplayMenuItem(MenuItem item)
+        {
+            Console.WriteLine($"\tMealNumber:{item.MealNumber}");
+            Console.WriteLine($"\tMeal Name:{item.Name}");
+            Console.WriteLine($"\tDescpription:{item.Description}");
+            foreach(var ingredient in item.ListOfIngredients)
+            {
+                Console.WriteLine($"\tIngredient:{ingredient}");
+            }
+            Console.WriteLine($"\tPrice:{item.Price}");
+        }
+        private bool GetYesNoAnswer()
+        {
+            while (true)
+            {
+                string input = Console.ReadLine().ToLower();
+                switch (input)
+                {
+                    case "yes":
+                    case "y":
+                    case "a":
+                        return true;
+                    case "no":
+                    case "n":
+                        return false;
+                }
+                Console.WriteLine("Please enter valid input");
+            }
         }
     }
 }

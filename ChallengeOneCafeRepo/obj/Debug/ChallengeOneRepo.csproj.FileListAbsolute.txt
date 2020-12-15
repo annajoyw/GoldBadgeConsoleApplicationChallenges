@@ -1,0 +1,5 @@
+C:\Users\13179\Desktop\Elevenfiftyprojects\Dotnetprojects\GoldBadgeConsoleAppChallenges\ChallengeOneCafeRepo\bin\Debug\ChallengeOneCafeRepo.dll
+C:\Users\13179\Desktop\Elevenfiftyprojects\Dotnetprojects\GoldBadgeConsoleAppChallenges\ChallengeOneCafeRepo\bin\Debug\ChallengeOneCafeRepo.pdb
+C:\Users\13179\Desktop\Elevenfiftyprojects\Dotnetprojects\GoldBadgeConsoleAppChallenges\ChallengeOneCafeRepo\obj\Debug\ChallengeOneRepo.csproj.CoreCompileInputs.cache
+C:\Users\13179\Desktop\Elevenfiftyprojects\Dotnetprojects\GoldBadgeConsoleAppChallenges\ChallengeOneCafeRepo\obj\Debug\ChallengeOneCafeRepo.dll
+C:\Users\13179\Desktop\Elevenfiftyprojects\Dotnetprojects\GoldBadgeConsoleAppChallenges\ChallengeOneCafeRepo\obj\Debug\ChallengeOneCafeRepo.pdb

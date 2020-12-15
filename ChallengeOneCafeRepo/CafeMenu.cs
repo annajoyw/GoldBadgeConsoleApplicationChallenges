@@ -6,25 +6,27 @@ using System.Threading.Tasks;
 
 namespace ChallengeOneCafeRepo
 {
-    public class CafeMenu
+    public class MenuItem
     {
         public int  MealNumber { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public string Ingredients { get; set; }
+        public List<string> ListOfIngredients { get; set; }
         public double Price { get; set; }
 
-        public CafeMenu(int mealNumber, string name, string description, string ingredients, double price) 
+        public MenuItem()
+        {
+
+        }
+        public MenuItem(int mealNumber, string name, string description, List<string> listOfIngredients, double price) 
         {
             MealNumber = mealNumber;
             Name = name;
             Description = description;
-            Ingredients = ingredients;
+            ListOfIngredients = listOfIngredients;
             Price = price;
         }
 
-        public CafeMenu()
-        {
-        }
+       
     }
 }

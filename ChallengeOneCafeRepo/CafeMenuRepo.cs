@@ -8,29 +8,29 @@ namespace ChallengeOneCafeRepo
 {
     public class CafeMenuRepo
     {
-        private List<CafeMenu> _listOfMenuItems = new List<CafeMenu>();
+        private List<MenuItem> _menuDirectory = new List<MenuItem>();
 
         //create
-        public void AddNewMenuItem(CafeMenu item)
+        public void AddItemToDirectory(MenuItem item)
         {
-            _listOfMenuItems.Add(item);
+            _menuDirectory.Add(item);
         }
         //read
-        public List<CafeMenu> SeeMenu()
+        public List<MenuItem> SeeMenu()
         {
-            return _listOfMenuItems;
+            return _menuDirectory;
         }
         //update
-        public bool UpdateMenuItem(int originalMenuItem, CafeMenu newMenuItem)
+        public bool UpdateMenuItem(int originalMenuItem, MenuItem newMenuItem)
         {
-            CafeMenu oldMenuItem = GetItemByNumber(originalMenuItem);
+            MenuItem oldMenuItem = GetItemByNumber(originalMenuItem);
 
             if (oldMenuItem != null) 
             {
                 oldMenuItem.MealNumber = newMenuItem.MealNumber;
                 oldMenuItem.Name = newMenuItem.Name;
                 oldMenuItem.Description = newMenuItem.Description;
-                oldMenuItem.Ingredients = newMenuItem.Ingredients;
+                oldMenuItem.ListOfIngredients = newMenuItem.ListOfIngredients;
                 oldMenuItem.Price = newMenuItem.Price;
                 return true;
             }
@@ -43,16 +43,16 @@ namespace ChallengeOneCafeRepo
         //delete
         public bool RemoveItemFromMenu(int number)
         {
-            CafeMenu item = GetItemByNumber(number);
+            MenuItem item = GetItemByNumber(number);
 
             if (item == null)
             {
                 return false;
             }
-            int initialCount = _listOfMenuItems.Count;
-            _listOfMenuItems.Remove(item);
+            int initialCount = _menuDirectory.Count;
+            _menuDirectory.Remove(item);
 
-            if (initialCount >_listOfMenuItems.Count)
+            if (initialCount >_menuDirectory.Count)
             {
                 return true;
             }
@@ -63,9 +63,9 @@ namespace ChallengeOneCafeRepo
         }
 
         //helper method
-        public CafeMenu GetItemByNumber(int number)
+        public MenuItem GetItemByNumber(int number)
         {
-            foreach(CafeMenu item in _listOfMenuItems)
+            foreach(MenuItem item in _menuDirectory)
             {
                 if (item.MealNumber == number)
                 {
