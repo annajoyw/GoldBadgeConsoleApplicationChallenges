@@ -10,11 +10,14 @@ namespace ChallengeTwoRepo
     public class ClaimRepo
     {
         public Queue<ClaimObject> _queueOfClaims = new Queue<ClaimObject>();
-        //public DataTable claimDataTable = new DataTable();
         public void EnterNewClaim(ClaimObject newClaim)
         {
-            ClaimObject firstClaim = new ClaimObject(1, "Car", "Car Accident on 464.", "$400.00", new DateTime(2018, 4, 25), new DateTime(2018, 4, 27), true);
-            _queueOfClaims.Enqueue(firstClaim);
+            //ClaimObject firstClaim = new ClaimObject(1, "Car", "Car Accident on 464.", "$400.00", new DateTime(2018, 4, 25), new DateTime(2018, 4, 27), true);
+            _queueOfClaims.Enqueue(newClaim);
+        }
+        public Queue<ClaimObject> GetQueue()
+        {
+            return _queueOfClaims;
         }
         public DataTable ClaimTable()
         {
@@ -78,7 +81,6 @@ namespace ChallengeTwoRepo
             }
 
         }
-
         public Queue<ClaimObject> HandleNextClaim()
         {
             return _queueOfClaims;
@@ -87,13 +89,6 @@ namespace ChallengeTwoRepo
         {
             _queueOfClaims.Dequeue();
         }
-
-        /*public DataTable SeeAllClaims()
-        {
-           // return claimTable;
-           // return _queueOfClaims;
-        }*/
-
         public ClaimObject GetClaimById(int id)
         {
             foreach(ClaimObject claim in _queueOfClaims)
@@ -105,6 +100,5 @@ namespace ChallengeTwoRepo
             }
             return null;
         }
-
     }
 }

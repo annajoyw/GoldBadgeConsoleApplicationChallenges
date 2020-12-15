@@ -82,9 +82,13 @@ namespace ChallengeOneCafeConsole
             Console.WriteLine("Please enter meal description");
             newItem.Description = Console.ReadLine();
 
-            Console.WriteLine("Please enter meal ingredients");
-            string ingredientList = Console.ReadLine();
-            newItem.ListOfIngredients.Add(ingredientList);
+            Console.WriteLine("Enter meal ingredients (please separate each ingredient with a comma)");
+            List<string> listOfIngredientsAsString = Console.ReadLine().Split(',').ToList();
+
+            foreach(string item in listOfIngredientsAsString)
+            {
+                listOfIngredientsAsString.Add(item);
+            }
 
             Console.WriteLine("Please enter meal price(enter price as decimal ex. 2.99 or 10.00)");
             string priceAsString = Console.ReadLine();
@@ -174,9 +178,10 @@ namespace ChallengeOneCafeConsole
             foreach (MenuItem item in cafeMenus)
             {
                 Console.WriteLine($"Meal Number:{item.MealNumber}, Name: {item.Name}, Description: {item.Description}, Price: {item.Price}");
+                Console.WriteLine("Ingredients:");
                 foreach(var ingredient in item.ListOfIngredients)
                 {
-                    Console.WriteLine($"Ingredient:{ingredient}");
+                    Console.WriteLine($"{ingredient}");
                 }
             }
 
@@ -203,9 +208,10 @@ namespace ChallengeOneCafeConsole
             Console.WriteLine($"\tMealNumber:{item.MealNumber}");
             Console.WriteLine($"\tMeal Name:{item.Name}");
             Console.WriteLine($"\tDescpription:{item.Description}");
+            Console.WriteLine("\tIngredients:");
             foreach(var ingredient in item.ListOfIngredients)
             {
-                Console.WriteLine($"\tIngredient:{ingredient}");
+                Console.WriteLine($"\t{ingredient}");
             }
             Console.WriteLine($"\tPrice:{item.Price}");
         }

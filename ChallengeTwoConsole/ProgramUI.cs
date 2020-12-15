@@ -56,18 +56,16 @@ namespace ChallengeTwoConsole
         private void SeeAllClaims()
         {
             Console.Clear();
-            DataTable dataTable =_claimRepo.ClaimTable();
-
-            // DataTable claimInfo = _claimRepo.ClaimTable();
-            /*foreach(ClaimObject info in claimInfo)
+            var allClaims = _claimRepo.GetQueue();
+            foreach(var claim in allClaims)
             {
-                Console.WriteLine($"Claim ID:{info.ClaimID}, Claim Type:{info.ClaimType}, Description:{info.Desctription}, Amount: {info.ClaimAmount}, Date of Incident:{info.DateOfIncident.Date}, Date of Claim:{info.DateOfClaim.Date}, Is Valid:{info.IsValid}" );
-            }*/
+                DisplayQueue(claim);
+            }
+
         }
         private void EnterNewClaim()
         {
             Console.Clear();
-            int timeBeforeClaimLapse=30;
             ClaimObject newClaim = new ClaimObject();
 
             Console.WriteLine("Enter the claim ID:");
@@ -83,14 +81,25 @@ namespace ChallengeTwoConsole
             Console.WriteLine("Enter amount of damage:");
             newClaim.ClaimAmount = Console.ReadLine();
 
-           // Console.WriteLine("how much time before claim lapse");
-           // timeBeforeCaimLapse = int.Parse(Console.ReadLine());
-
+            // Console.WriteLine("how much time before claim lapse");
+            // timeBeforeCaimLapse = int.Parse(Console.ReadLine());
           DateTime dateOfIncident = IncidentClaimCreationHelperMethod();
           DateTime dateOfClaim= ClaimCreationHelperMethod();
+            Console.WriteLine("Company policy states the claim must be made within 30 days of the accident to remain valid. Please press 'y' if this claim is valid, or 'n' if claim is not valid.");
+            bool answer = GetYesNoAnswer();
+            if (answer)
+            {
+                Console.WriteLine("This claim has been documented as valid.");
+                newClaim.IsValid = true;
+            }
+            else
+            {
+                Console.WriteLine("This claim has been documented as not valid.");
+                newClaim.IsValid = false;
+            }
 
 
-            int ans = dateOfIncident.Day - dateOfClaim.Day;
+            /*int ans = dateOfIncident.Day - dateOfClaim.Day;
             if (ans <= timeBeforeClaimLapse)
             {
                 Console.WriteLine("This claim is valid");
@@ -98,10 +107,9 @@ namespace ChallengeTwoConsole
             else
             {
                 Console.WriteLine("this claim is not valid");
-            }
+            }*/
 
         }
-
         private DateTime IncidentClaimCreationHelperMethod()
         {
 
@@ -118,7 +126,6 @@ namespace ChallengeTwoConsole
              DateTime dateOfIncident = new DateTime(inputYearOfAccident, inputMonthOfAccident, inputDayofAccident);
             return dateOfIncident;
         }
-
         private DateTime ClaimCreationHelperMethod()
         {
 
@@ -135,7 +142,6 @@ namespace ChallengeTwoConsole
             DateTime dateOfIncident = new DateTime(inputYearOfAccident, inputMonthOfAccident, inputDayofAccident);
             return dateOfIncident;
         }
-
         //get rid of time in dateTime?
         private void TakeCareOfNextClaim()
         {
@@ -155,6 +161,7 @@ namespace ChallengeTwoConsole
             string input = Console.ReadLine().ToLower();
             if (input == "y")
             {
+                Console.WriteLine("Great! Claim has been removed from queue.");
                 _claimRepo.removeNextClaimFromQueue();
             }
             else
@@ -163,13 +170,38 @@ namespace ChallengeTwoConsole
                 Menu();
             }
         }
-
         private void SeedClaimList()
         {
             ClaimObject claimOne = new ClaimObject(1, "Car", "Car Accident on 464.", "$400.00", new DateTime(2018, 4, 25), new DateTime(2018, 4, 27), true);
             _claimRepo.EnterNewClaim(claimOne);
             
         }
-        
+        private bool GetYesNoAnswer()
+        {
+            while (true)
+            {
+                string input = Console.ReadLine().ToLower();
+                switch (input)
+                {
+                    case "yes":
+                    case "y":
+                        return true;
+                    case "no":
+                    case "n":
+                        return false;
+                }
+                Console.WriteLine("Please enter valid input");
+            }
+        }
+        private void DisplayQueue(ClaimObject displayClaim)
+        {
+                Console.WriteLine($"Claim ID:{displayClaim.ClaimID}");
+                Console.WriteLine($"Claim Type:{displayClaim.ClaimType}");
+                Console.WriteLine($"Descpription:{displayClaim.Desctription}");
+                Console.WriteLine($"Claim Amount:{displayClaim.ClaimAmount}");
+                Console.WriteLine($"Date of Incident:{displayClaim.DateOfIncident}");
+                Console.WriteLine($"Date of Claim:{displayClaim.DateOfClaim}");
+                Console.WriteLine($"Is Claim Valid:{displayClaim.IsValid}");
+        }
     }
 }

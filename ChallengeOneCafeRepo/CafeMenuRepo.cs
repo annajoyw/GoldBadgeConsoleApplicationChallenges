@@ -39,7 +39,6 @@ namespace ChallengeOneCafeRepo
                 return false;
             }
         }
-
         //delete
         public bool RemoveItemFromMenu(int number)
         {

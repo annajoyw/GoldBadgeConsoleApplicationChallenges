@@ -210,16 +210,6 @@ namespace ChallengeThreeConsole
                 Console.WriteLine($"\tAccessible Door:{door}");
             }
         }
-        private void DisplayBadgeDictionary(Badge badgeInfo)
-        {
-            var badgeDict = _badgeRepo.SeeAllBadges();
-            //Console.WriteLine($"\tID: {badgeInfo.BadgeId}");
-            //Console.WriteLine($"\tDoor Access: {badgeInfo.ListOfDoors}");
-            foreach (var badge in badgeDict)
-            {
-                DisplayBadge(badge.Value);
-            }
-        }
         private void DisplayAllDoors(Badge listOfDoors)
         {
             Console.WriteLine($"Door Name:{listOfDoors.ListOfDoors}");
