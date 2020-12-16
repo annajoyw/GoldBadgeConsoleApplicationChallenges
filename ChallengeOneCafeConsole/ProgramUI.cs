@@ -84,10 +84,12 @@ namespace ChallengeOneCafeConsole
 
             Console.WriteLine("Enter meal ingredients (please separate each ingredient with a comma)");
             List<string> listOfIngredientsAsString = Console.ReadLine().Split(',').ToList();
-
-            foreach(string item in listOfIngredientsAsString)
+            //var listOfIngredientsToAdd = new List<string>();
+            foreach (string item in listOfIngredientsAsString)
             {
-                listOfIngredientsAsString.Add(item);
+                //int idAsInt = int.Parse(item);
+                //MenuItem ingredientToAdd = _menuRepo.GetItemByNumber(idAsInt);
+                newItem.ListOfIngredients.Add(item);
             }
 
             Console.WriteLine("Please enter meal price(enter price as decimal ex. 2.99 or 10.00)");
@@ -168,7 +170,7 @@ namespace ChallengeOneCafeConsole
                     break;
             }
             _menuRepo.UpdateMenuItem(mealNumber, newItem);
-            Console.WriteLine("For updating aspects other than 'Ingredients' please view 'current menu' option in main menu to ensure item was successfully updated.");
+            Console.WriteLine("Bravo! Item has been updated.");
 
         }
         private void ViewMenu()
