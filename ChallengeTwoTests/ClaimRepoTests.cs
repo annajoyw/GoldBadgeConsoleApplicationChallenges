@@ -29,5 +29,13 @@ namespace ChallengeTwoTests
 
             Assert.IsNotNull(claimFromDirectory);
         }
+
+        [TestMethod]
+        public void GetQueue()
+        {
+
+        }
+
+    
     }
 }
