@@ -11,7 +11,7 @@ namespace ChallengeOneCafeRepo
         public int  MealNumber { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public List<string> ListOfIngredients { get; set; }
+        public List<string> ListOfIngredients { get; set; } = new List<string>();
         public double Price { get; set; }
 
         public MenuItem()
@@ -26,7 +26,11 @@ namespace ChallengeOneCafeRepo
             ListOfIngredients = listOfIngredients;
             Price = price;
         }
-
-       
+        public void AddIngredientsToList(List<string> ingredientToAdd)
+        {
+            MenuItem item = new MenuItem();
+            item.ListOfIngredients = new List<string>();
+            item.ListOfIngredients.AddRange(ingredientToAdd);
+        }
     }
 }

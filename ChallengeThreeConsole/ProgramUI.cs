@@ -82,17 +82,18 @@ namespace ChallengeThreeConsole
             {
                 Console.WriteLine("Please list a door this badge has access to");
                 string secondBadgeDoor = Console.ReadLine();
+                newBadge.ListOfDoors.Add(secondBadgeDoor);
                 Console.WriteLine("Would you like to add another another door? (y/n)");
                 bool secondAnswer = GetYesNoAnswer();
                 if (secondAnswer == true)
                 {
                     Console.WriteLine("Please list a door this badge has access to");
                     string thirdBadgeDoor = Console.ReadLine();
+                    newBadge.ListOfDoors.Add(thirdBadgeDoor);
                 }
                 else
                 {
-                    Console.Clear();
-                    Menu();
+                    Console.WriteLine($"Magnificent! Badge number {badgeID} has been added to the list of badges.");
                 }
             }
             _badgeRepo.AddBadgeToDictionary(newBadge);
@@ -182,7 +183,6 @@ namespace ChallengeThreeConsole
             }
 
         }
-            
         private bool GetYesNoAnswer()
         {
             while (true)
@@ -207,12 +207,13 @@ namespace ChallengeThreeConsole
 
             foreach(var door in displayBadge.ListOfDoors)
             {
-                Console.WriteLine($"\tAccessible Door:{door}");
+                Console.WriteLine($"\t\tAccessible Door:{door}");
             }
         }
         private void DisplayAllDoors(Badge listOfDoors)
         {
-            Console.WriteLine($"Door Name:{listOfDoors.ListOfDoors}");
+            foreach(var door in listOfDoors.ListOfDoors)
+            Console.WriteLine($"Door Name:{door}");
         }
     }
 }

@@ -146,7 +146,7 @@ namespace ChallengeTwoConsole
         private void TakeCareOfNextClaim()
         {
             Console.Clear();
-            Queue<ClaimObject> claimQueue = _claimRepo.HandleNextClaim();
+            Queue<ClaimObject> claimQueue = _claimRepo.GetQueue();
             ClaimObject firstClaim = new ClaimObject(1, "Car", "Car Accident on 464.", "$400.00", new DateTime(2018, 4, 25), new DateTime(2018, 4, 27), true);
             claimQueue.Peek();
 

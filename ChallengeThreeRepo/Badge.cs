@@ -11,7 +11,7 @@ namespace ChallengeThreeRepo
         //public List<string> _doorNames = new List<string>();
         
         public int BadgeId { get; set; }
-        public List<string> ListOfDoors { get; set; } //= new List<string>();
+        public List<string> ListOfDoors { get; set; } = new List<string>();
         
 
         public Badge() { }

@@ -84,13 +84,7 @@ namespace ChallengeOneCafeConsole
 
             Console.WriteLine("Enter meal ingredients (please separate each ingredient with a comma)");
             List<string> listOfIngredientsAsString = Console.ReadLine().Split(',').ToList();
-            //var listOfIngredientsToAdd = new List<string>();
-            foreach (string item in listOfIngredientsAsString)
-            {
-                //int idAsInt = int.Parse(item);
-                //MenuItem ingredientToAdd = _menuRepo.GetItemByNumber(idAsInt);
-                newItem.ListOfIngredients.Add(item);
-            }
+            newItem.AddIngredientsToList(listOfIngredientsAsString);
 
             Console.WriteLine("Please enter meal price(enter price as decimal ex. 2.99 or 10.00)");
             string priceAsString = Console.ReadLine();
@@ -104,6 +98,7 @@ namespace ChallengeOneCafeConsole
             Console.WriteLine("Pleae enter meal number of the item you wish to update");
             int mealNumber = int.Parse(Console.ReadLine());
             MenuItem mealToUpdate = _menuRepo.GetItemByNumber(mealNumber);
+            Console.Clear();
             DisplayMenuItem(mealToUpdate);
             MenuItem newItem = new MenuItem();
             Console.WriteLine("What would you like to update?\n" +
@@ -132,22 +127,26 @@ namespace ChallengeOneCafeConsole
                     //string userInput=(Console.ReadLine());
                     //yes/no method also takes in "a" and "r"
                     bool input = GetYesNoAnswer();
-                    if (input)
+                    if (input == true)
                     {
-                        Console.WriteLine("Please enter the ingredients you would like to add");
-                        string newIngredient = Console.ReadLine();
-                        newItem.ListOfIngredients.Add(newIngredient);
+                        Console.WriteLine("Please enter the ingredients you would like to add separeted by a comma");
                         int initialCount = newItem.ListOfIngredients.Count;
-                        if (initialCount< newItem.ListOfIngredients.Count)
+                        List<string> listOfIngredientsAsString = Console.ReadLine().Split(',').ToList();
+                        //newItem.ListOfIngredients.Add(listOfIngredientsAsString);
+                        foreach(var item in listOfIngredientsAsString)
                         {
-                            Console.WriteLine("New Ingredients were successfully added");
+                            newItem.ListOfIngredients.Add(item);
+                        }
+                        if (initialCount < newItem.ListOfIngredients.Count)
+                        {
+                            Console.WriteLine("Hooray! New Ingredients were successfully added");
                         }
                         else
                         {
                             Console.WriteLine("New Ingredients could not be added");
                         }
                     }
-                    else
+                    if(input == false)
                     {
                         Console.WriteLine("Please enter the ingredient you wish to remove from list");
                         string removedIngredient = Console.ReadLine();
@@ -183,7 +182,7 @@ namespace ChallengeOneCafeConsole
                 Console.WriteLine("Ingredients:");
                 foreach(var ingredient in item.ListOfIngredients)
                 {
-                    Console.WriteLine($"{ingredient}");
+                    Console.WriteLine($"\t{ingredient}");
                 }
             }
 
@@ -230,10 +229,12 @@ namespace ChallengeOneCafeConsole
                         return true;
                     case "no":
                     case "n":
+                    case "r":
                         return false;
                 }
                 Console.WriteLine("Please enter valid input");
             }
         }
+        
     }
 }

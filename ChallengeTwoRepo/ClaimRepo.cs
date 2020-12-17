@@ -19,10 +19,6 @@ namespace ChallengeTwoRepo
         {
             return _queueOfClaims;
         }
-        public Queue<ClaimObject> HandleNextClaim()
-        {
-            return _queueOfClaims;
-        }
         public void removeNextClaimFromQueue()
         {
             _queueOfClaims.Dequeue();
