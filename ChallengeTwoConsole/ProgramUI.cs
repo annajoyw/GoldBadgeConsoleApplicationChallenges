@@ -52,10 +52,10 @@ namespace ChallengeTwoConsole
                 Console.Clear();
             }
         }
-        //research .date
         private void SeeAllClaims()
         {
             Console.Clear();
+            Console.WriteLine("Claim ID \t Claim Type \t Description \t\t Claim Amount \t\t Date of Incident \t\t Date of Claim \t\t Valid claim?");
             var allClaims = _claimRepo.GetQueue();
             foreach(var claim in allClaims)
             {
@@ -81,10 +81,14 @@ namespace ChallengeTwoConsole
             Console.WriteLine("Enter amount of damage:");
             newClaim.ClaimAmount = Console.ReadLine();
 
-            // Console.WriteLine("how much time before claim lapse");
-            // timeBeforeCaimLapse = int.Parse(Console.ReadLine());
-          DateTime dateOfIncident = IncidentClaimCreationHelperMethod();
-          DateTime dateOfClaim= ClaimCreationHelperMethod();
+            Console.WriteLine("Enter the date of the incident YYYY-MM-DD:");
+            DateTime incidentDate = DateTime.Parse(Console.ReadLine());
+            newClaim.DateOfIncident = incidentDate;
+
+            Console.WriteLine("Enter the date the claim was made YYYY-MM-DD:");
+            DateTime claimDate = DateTime.Parse(Console.ReadLine());
+            newClaim.DateOfClaim = claimDate;
+
             Console.WriteLine("Company policy states the claim must be made within 30 days of the accident to remain valid. Please press 'y' if this claim is valid, or 'n' if claim is not valid.");
             bool answer = GetYesNoAnswer();
             if (answer)
@@ -97,8 +101,7 @@ namespace ChallengeTwoConsole
                 Console.WriteLine("This claim has been documented as not valid.");
                 newClaim.IsValid = false;
             }
-
-
+            _claimRepo.EnterNewClaim(newClaim);
             /*int ans = dateOfIncident.Day - dateOfClaim.Day;
             if (ans <= timeBeforeClaimLapse)
             {
@@ -108,41 +111,7 @@ namespace ChallengeTwoConsole
             {
                 Console.WriteLine("this claim is not valid");
             }*/
-
         }
-        private DateTime IncidentClaimCreationHelperMethod()
-        {
-
-            Console.WriteLine("Please input the year of incident.");
-            int inputYearOfAccident = int.Parse(Console.ReadLine());
-
-            Console.WriteLine("Please input the month of incident.");
-            int inputMonthOfAccident = int.Parse(Console.ReadLine());
-
-            Console.WriteLine("Please input the day of incident.");
-            int inputDayofAccident = int.Parse(Console.ReadLine());
-
-
-             DateTime dateOfIncident = new DateTime(inputYearOfAccident, inputMonthOfAccident, inputDayofAccident);
-            return dateOfIncident;
-        }
-        private DateTime ClaimCreationHelperMethod()
-        {
-
-            Console.WriteLine("Please input the year claim was made.");
-            int inputYearOfAccident = int.Parse(Console.ReadLine());
-
-            Console.WriteLine("Please input the Month claim was made.");
-            int inputMonthOfAccident = int.Parse(Console.ReadLine());
-
-            Console.WriteLine("Please input the Day claim was made.");
-            int inputDayofAccident = int.Parse(Console.ReadLine());
-
-
-            DateTime dateOfIncident = new DateTime(inputYearOfAccident, inputMonthOfAccident, inputDayofAccident);
-            return dateOfIncident;
-        }
-        //get rid of time in dateTime?
         private void TakeCareOfNextClaim()
         {
             Console.Clear();
@@ -195,13 +164,8 @@ namespace ChallengeTwoConsole
         }
         private void DisplayQueue(ClaimObject displayClaim)
         {
-                Console.WriteLine($"Claim ID:{displayClaim.ClaimID}");
-                Console.WriteLine($"Claim Type:{displayClaim.ClaimType}");
-                Console.WriteLine($"Descpription:{displayClaim.Desctription}");
-                Console.WriteLine($"Claim Amount:{displayClaim.ClaimAmount}");
-                Console.WriteLine($"Date of Incident:{displayClaim.DateOfIncident}");
-                Console.WriteLine($"Date of Claim:{displayClaim.DateOfClaim}");
-                Console.WriteLine($"Is Claim Valid:{displayClaim.IsValid}");
+            Console.WriteLine($"{displayClaim.ClaimID} \t\t {displayClaim.ClaimType} \t\t {displayClaim.Desctription} \t {displayClaim.ClaimAmount} \t\t {displayClaim.DateOfIncident.Date.ToShortDateString()} \t\t\t {displayClaim.DateOfClaim.Date.ToShortDateString()} \t\t {displayClaim.IsValid}");
+
         }
     }
 }
