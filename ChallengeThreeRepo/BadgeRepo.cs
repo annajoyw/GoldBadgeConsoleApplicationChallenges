@@ -61,7 +61,7 @@ namespace ChallengeThreeRepo
         {
             foreach(var badge in _badgeDictionary)
             {
-                if (badge.Key== idNum)
+                if (badge.Key == idNum)
                 {
                     return badge.Value;
                 }

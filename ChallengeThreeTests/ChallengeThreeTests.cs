@@ -43,7 +43,6 @@ namespace ChallengeThreeTests
             _badgeRepo.AddBadgeToDictionary(addBadge);
             Badge badgeFromDict = _badgeRepo.GetBadgeByID(4);
             Assert.IsNotNull(badgeFromDict);
-
         }
     }
 }

@@ -24,7 +24,6 @@ namespace ChallengeThreeConsole
             _badgeRepo.AddBadgeToDictionary(badge1);
             _badgeRepo.AddBadgeToDictionary(badge2);
             _badgeRepo.AddBadgeToDictionary(badge3);
-            
         }
         public void Menu()
         {
@@ -102,12 +101,12 @@ namespace ChallengeThreeConsole
         private void ViewAllBadges()
         {
             Console.Clear();
+            Console.WriteLine($"Badge ID:\t\tAcceccible Doors:");
             var allBadges = _badgeRepo.SeeAllBadges();
             foreach(var badge in allBadges)
             {
                 DisplayBadge(badge.Value);
             }
-          
         }
         private void DeleteBadge()
         {
@@ -202,12 +201,9 @@ namespace ChallengeThreeConsole
         }
         private void DisplayBadge(Badge displayBadge)
         {
-            Console.WriteLine($"\tBadge ID: {displayBadge.BadgeId}");
-            //Console.WriteLine($"\tAccessible Doors:{displayBadge.ListOfDoors}");
-
             foreach(var door in displayBadge.ListOfDoors)
             {
-                Console.WriteLine($"\t\tAccessible Door:{door}");
+                Console.WriteLine($"{displayBadge.BadgeId}\t\t\t\t{door}");
             }
         }
         private void DisplayAllDoors(Badge listOfDoors)
