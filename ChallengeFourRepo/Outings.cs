@@ -13,16 +13,19 @@ namespace ChallengeFourRepo
         public DateTime OutingDate { get; set; }
         public double CostPerPerson { get; set; }
         public double CostOfEvent { get; set; }
-        public List<Outings> OutingsList { get; set; }
 
-        public Outings(string eventType, int numOfAttendees, DateTime outingDate, double costPerPerson, double costOfEvent, List<Outings> outingsList)
+
+        public List<Outings> OutingsList { get; set; } = new List<Outings>();
+        public Outings() { }
+
+        public Outings(string eventType, int numOfAttendees, DateTime outingDate, double costPerPerson, double costOfEvent)
         {
             EventType = eventType;
             NumOfAttendees = numOfAttendees;
             OutingDate = outingDate;
             CostPerPerson = costPerPerson;
             CostOfEvent = costOfEvent;
-            OutingsList = outingsList;
+            //OutingsList = outingsList;
         }
         public void AddOutingToList(List<Outings> outingsToAdd)
         {
