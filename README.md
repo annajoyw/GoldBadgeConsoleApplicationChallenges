@@ -1,5 +1,5 @@
 # GoldBadgeConsoleApplicationChallenges
-Hello and welcome to my github repository! Here you will find an _array_ of mediocre console applications. You may be asking yourself, "Anna, why did you make several mediocre apps?" The answer to that my friend, is because this is a project made for my course at Eleven Fifty Academy.
+Welcome to my Gold Badge Console App project. In this repository there are several text-based programs written in C#.
 ### Features and Example
 Each console app in this repository was created to allow business owners and employee to create, read, update, and delete information regarding their specific business needs. Below is an example UI from Challenge One.
 
