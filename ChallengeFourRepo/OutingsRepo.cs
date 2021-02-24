@@ -10,7 +10,9 @@ namespace ChallengeFourRepo
     {
         public List<Outings> _outingsDirectory = new List<Outings>();
 
-        public List<double> _allOutingCost = new List<double>();
+        //FIX METHOD FOR COST OF EACH AND ALL OUTINGS 
+
+        //public List<double> _allOutingCost = new List<double>();
 
         public List<double> _costPerPerson = new List<double>();
 
@@ -29,13 +31,18 @@ namespace ChallengeFourRepo
         //calculations
         public void AddOutingCostToList(Outings outingsCost)
         {
-            _allOutingCost.Add(outingsCost.CostOfEvent);
+            //_allOutingCost.Add(outingsCost.CostOfEvent);
         }
 
-        public double AddAllOutingsMethod()
+        public double AddAllOutingsMethod(Outings cost)
         {
-            double total = _allOutingCost.Sum();
-            return total;
+            List<int> total = new List<int>();
+            foreach (Outings outing in _outingsDirectory)
+            {
+
+                return outing.CostOfEvent;
+
+            }
         }
 
         public void AddCostPerPerson(Outings outingCostPerPerson)

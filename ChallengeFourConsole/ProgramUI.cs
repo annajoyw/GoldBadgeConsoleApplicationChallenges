@@ -120,7 +120,7 @@ namespace ChallengeFourConsole
         }
         private void DisplayCombinedCost()
         {
-            var cost = _repo.AddAllOutingsMethod();
+            //var cost = _repo.AddAllOutingsMethod();
             Console.WriteLine($"Combined cost of all events: {cost}");
         }
 
