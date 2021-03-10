@@ -4,19 +4,19 @@ Welcome to my Gold Badge Console Application project! Each app in this repositor
 ### Challenge Overview
 **Challenge One: Komodo Cafe**
 
-Allows the cafe manager to add, delete, and see all items in the menu list.
+    Allows the cafe manager to add, delete, and see all items in the menu list.
 
 **Challenge Two: Claims**
 
-Program file that allows a claims manager to manage items in a list of claims.
+    Program file that allows a claims manager to manage items in a list of claims.
 
 **Challenge Three: Badges**
 
-App that maintains a dictionary of details about employee badge information.
+    App that maintains a dictionary of details about employee badge information.
 
 **Challenge Four & Five**
 
-*currently in progess of being completed*
+    *currently in progess of being completed*
 
 ### Example
 Below is an example UI from Challenge One.
